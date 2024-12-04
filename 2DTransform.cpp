@@ -4,7 +4,7 @@
 #include <conio.h>
 using namespace std;
 
-void multiplyMatrix(float mat[3][3], float points[][1], float result[][1]) {
+void multiplyMatrix(int mat[3][3], int points[][1], int result[][1]) {
     for (int i = 0; i < 3; i++) {
         result[i][0] = 0;
         for (int j = 0; j < 3; j++) {
@@ -13,7 +13,7 @@ void multiplyMatrix(float mat[3][3], float points[][1], float result[][1]) {
     }
 }
 
-void drawRectangle(float x1, float y1, float x2, float y2) {
+void drawRectangle(int x1, int y1, int x2, int y2) {
     rectangle(x1, y1, x2, y2);
 }
 
@@ -27,14 +27,15 @@ int main() {
     int s;
     cin >> s;
 
-    float x1 = 200, y1 = 150, x2 = 300, y2 = 250;
-    float points[3][1] = {{x1}, {y1}, {1}};
-    float result[3][1];
-    float mat[3][3];
+    int x1 = 200, y1 = 150, x2 = 300, y2 = 250;
+    int points[3][1] = {{x1}, {y1}, {1}};
+    int result[3][1];
+    int mat[3][3];
 
     switch (s) {
         case 1: {
-            float tx, ty;
+            int tx, ty;
+            cout << "Enter translation values (tx, ty): ";
             cin >> tx >> ty;
             mat[0][0] = 1; mat[0][1] = 0; mat[0][2] = tx;
             mat[1][0] = 0; mat[1][1] = 1; mat[1][2] = ty;
@@ -48,9 +49,10 @@ int main() {
             break;
         }
         case 2: {
-            float angle;
+            int angle;
+            cout << "Enter angle of rotation: ";
             cin >> angle;
-            angle = angle * M_PI / 180.0;
+            angle = (angle * 3.14) / 180;  // Convert angle to radians
             mat[0][0] = cos(angle); mat[0][1] = -sin(angle); mat[0][2] = 0;
             mat[1][0] = sin(angle); mat[1][1] = cos(angle); mat[1][2] = 0;
             mat[2][0] = 0; mat[2][1] = 0; mat[2][2] = 1;
@@ -63,7 +65,8 @@ int main() {
             break;
         }
         case 3: {
-            float sx, sy;
+            int sx, sy;
+            cout << "Enter scaling factors (sx, sy): ";
             cin >> sx >> sy;
             mat[0][0] = sx; mat[0][1] = 0; mat[0][2] = 0;
             mat[1][0] = 0; mat[1][1] = sy; mat[1][2] = 0;
@@ -78,6 +81,7 @@ int main() {
         }
         case 4: {
             int choice;
+            cout << "Enter reflection choice (1 for horizontal, 2 for vertical): ";
             cin >> choice;
             if (choice == 1) {
                 mat[0][0] = 1; mat[0][1] = 0; mat[0][2] = 0;
@@ -97,7 +101,8 @@ int main() {
             break;
         }
         case 5: {
-            float shx, shy;
+            int shx, shy;
+            cout << "Enter shearing factors (shx, shy): ";
             cin >> shx >> shy;
             mat[0][0] = 1; mat[0][1] = shx; mat[0][2] = 0;
             mat[1][0] = shy; mat[1][1] = 1; mat[1][2] = 0;
